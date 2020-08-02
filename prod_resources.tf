@@ -5,9 +5,11 @@ provider "aws"  {
 
 }
 
-resource "aws_s3_bucket" "tf-coursedemo"  {
-  bucket = "tf-course-02082020"
+resource "aws_s3_bucket" "prod_tf-coursedemo"  {
+  bucket = "tf-course-02082020"  
   acl    = "private"
 
 
 }
+
+resource "aws_default_vpc" "default" {}
