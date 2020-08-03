@@ -45,6 +45,8 @@ ingress {
 }  
 
 resource "aws_instance" "prod_web" {
+  count = 2
+
   ami            = "ami-0d03db8518ef1c62e"
   instance_type  = "t2.nano"
   
@@ -57,8 +59,15 @@ resource "aws_instance" "prod_web" {
    }
 }  
 
+resource "aws_eip_association" "prod_web" {
+  instance_id = aws_instance.prod_web.0.id
+  allocation_id = aws_eip.prod_web.id
+}
+
 resource "aws_eip" "prod_web" {
   tags = {
      "Terraform" : "true"
    }
 }
+
+
